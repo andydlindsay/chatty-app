@@ -5,6 +5,7 @@ import MessageList from './MessageList.jsx';
 import Favicon from 'react-favicon';
 
 import data from './data/data.json';
+import { runInThisContext } from 'vm';
 
 class App extends Component {
 
@@ -14,10 +15,21 @@ class App extends Component {
       messages: data,
       currentUser: { name: 'MarbleToast' }
     };
+    this.newMessage = this.newMessage.bind(this);
   }
 
-  componentDidMount() {
-    document.title = 'Chatty App';
+  newMessage(event) {
+    event.preventDefault();
+    const username = event.target.elements['username'].value || this.state.currentUser.name;
+    const content = event.target.elements['message'].value;
+    const message = {
+      username,
+      content,
+      type: 'incomingMessage'
+    };
+    event.target.elements['message'].value = '';
+    const messages = [...this.state.messages, message];
+    this.setState({ messages })
   }
 
   render() {
@@ -26,7 +38,7 @@ class App extends Component {
         <Favicon url="./build/favicon.ico" />
         <NavBar />
         <MessageList messages={ this.state.messages } />
-        <ChatBar currentUser={ this.state.currentUser } />
+        <ChatBar currentUser={ this.state.currentUser } newMessage={ this.newMessage } />
       </Fragment>
     );
   }
