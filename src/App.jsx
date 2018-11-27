@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import NavBar from './NavBar.jsx';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
+import Favicon from 'react-favicon';
 
 import data from './data/data.json';
 
@@ -22,6 +23,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
+        <Favicon url="./build/favicon.ico" />
         <NavBar />
         <MessageList messages={ this.state.messages } />
         <ChatBar currentUser={ this.state.currentUser } />
