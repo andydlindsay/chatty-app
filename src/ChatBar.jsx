@@ -1,11 +1,12 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 class ChatBar extends Component {
     render() {
+        const { name } = this.props.currentUser;
         return (
-            <footer class="chatbar">
-                <input class="chatbar-username" placeholder="Your Name (Optional)" />
-                <input class="chatbar-message" placeholder="Type a message and hit ENTER" />
+            <footer className="chatbar">
+                <input className="chatbar-username" defaultValue={ name } placeholder="Your Name (Optional)" />
+                <input className="chatbar-message" placeholder="Type a message and hit ENTER" />
             </footer>
         );
     }
