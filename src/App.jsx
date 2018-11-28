@@ -12,7 +12,7 @@ class App extends Component {
     super(props);
     this.state = {
       messages: [],
-      currentUser: { name: 'Anon' },
+      currentUser: { name: 'Anon Nimus' },
       socket: {},
       currentUsers: 0,
       color: 'orange'

@@ -7,13 +7,13 @@ const regexIndexOf = function(regex, string) {
 }
 
 // image url regexp
-const regexImageUrl = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gi;
+const regexImageUrl = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg)/gi;
 
 class Message extends Component {
     render() {
         const { type, username, color } = this.props.message;
         let { content } = this.props.message;
-        let imageElement = (<span></span>);
+        let imageElement;
         const imageUrlIndex = regexIndexOf(regexImageUrl, content);
         if (imageUrlIndex >= 0) {
             // content contains an image url
