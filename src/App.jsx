@@ -12,9 +12,10 @@ class App extends Component {
     super(props);
     this.state = {
       messages: [],
-      currentUser: { name: 'MarbleToast' },
+      currentUser: { name: 'Anon' },
       socket: {},
-      currentUsers: 0
+      currentUsers: 0,
+      color: 'orange'
     };
     this.newMessage = this.newMessage.bind(this);
   }
@@ -24,6 +25,10 @@ class App extends Component {
 
     webSocket.onmessage = ({ data }) => {
       const parsedData = JSON.parse(data);
+      if (parsedData.type === 'setColor') {
+        this.setState({ color: parsedData.color });
+        return;
+      }
       if (parsedData.currentUsers) {
         this.setState({
           currentUsers: parsedData.currentUsers
@@ -52,8 +57,10 @@ class App extends Component {
       const message = {
         username,
         content,
-        type: 'incomingMessage'
+        type: 'incomingMessage',
+        color: this.state.color
       };
+      console.log(message);
       event.target.elements['message'].value = '';
       this.state.socket.send(JSON.stringify(message));
     }
