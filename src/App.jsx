@@ -13,7 +13,8 @@ class App extends Component {
     this.state = {
       messages: [],
       currentUser: { name: 'MarbleToast' },
-      socket: {}
+      socket: {},
+      currentUsers: 0
     };
     this.newMessage = this.newMessage.bind(this);
   }
@@ -22,8 +23,14 @@ class App extends Component {
     const webSocket = new WebSocket('ws://localhost:3001');
 
     webSocket.onmessage = ({ data }) => {
+      const parsedData = JSON.parse(data);
+      if (parsedData.currentUsers) {
+        this.setState({
+          currentUsers: parsedData.currentUsers
+        });
+      }
       const oldMessages = this.state.messages;
-      const messages = [...oldMessages, JSON.parse(data) ];
+      const messages = [...oldMessages, parsedData ];
       this.setState({ messages });
     };
     this.setState({ socket: webSocket });
@@ -56,7 +63,7 @@ class App extends Component {
     return (
       <Fragment>
         <Favicon url="./build/favicon.ico" />
-        <NavBar />
+        <NavBar currentUsers={this.state.currentUsers } />
         <MessageList messages={ this.state.messages } />
         <ChatBar currentUser={ this.state.currentUser } newMessage={ this.newMessage } />
       </Fragment>
