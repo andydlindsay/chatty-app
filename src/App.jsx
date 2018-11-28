@@ -60,7 +60,6 @@ class App extends Component {
         type: 'incomingMessage',
         color: this.state.color
       };
-      console.log(message);
       event.target.elements['message'].value = '';
       this.state.socket.send(JSON.stringify(message));
     }
