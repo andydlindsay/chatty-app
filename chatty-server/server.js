@@ -22,18 +22,23 @@ function sendMessage(messageObj) {
     });
 }
 
+function convertToBase16(input) {
+    const list = '0123456789abcdef';
+    let result = '';
+    let numDigits = 2;
+    const base = 16;
+    while (numDigits) {
+        result += list[Math.floor((input / (Math.pow(base, numDigits - 1))) % base)];
+        numDigits--;
+    }
+    return result;
+}
+
 function chooseRandomColor() {
-    const colorArray = [
-        'red',
-        'darkMagenta',
-        'blue',
-        'green',
-        'orange',
-        'aqua',
-        'violet',
-        'orchid',
-    ];
-    return colorArray[Math.floor(Math.random() * colorArray.length)];
+    const red = convertToBase16(Math.floor(Math.random() * 256));
+    const green = convertToBase16(Math.floor(Math.random() * 256));
+    const blue = convertToBase16(Math.floor(Math.random() * 256));
+    return `#${red}${green}${blue}`;
 }
 
 wss.on('connection', (ws) => {
