@@ -1,7 +1,7 @@
 {
-  "name": "react-simple-boilerplate",
+  "name": "chatty-appy",
   "version": "1.0.0",
-  "description": "Simple and lightweight Boilerplate for ReactJS projects",
+  "description": "Simple SPA utilizing React and WebSockets for real-time chat",
   "scripts": {
     "lint": "eslint --ext .jsx,.js src",
     "start": "node server.js"
@@ -11,13 +11,7 @@
     "url": "https://github.com/andydlindsay/chatty-app"
   },
   "keywords": [
-    "react",
-    "reactjs",
-    "boilerplate",
-    "reload",
-    "live",
-    "edit",
-    "webpack"
+    "chat"
   ],
   "author": "Andy Lindsay <andydlindsay@gmail.com>",
   "license": "MIT",
